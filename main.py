@@ -30,6 +30,20 @@ app.add_middleware(
 )
 
 
+# ---- FIX FOR VERCEL PYTHON SERVERLESS ----
+@app.options("/qr")
+def options_qr():
+    return JSONResponse(
+        content={"message": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        },
+    )
+# ------------------------------------------
+
+
 @app.post("/qr", response_class=JSONResponse)
 def create_qr(data: QRParams):
     """
