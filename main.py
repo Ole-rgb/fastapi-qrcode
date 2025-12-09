@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 import io
 
 from models import QRParams
@@ -10,6 +11,21 @@ app = FastAPI(
     title="QR Code API",
     description="FastAPI application, deployed via Vercel, that generates QR codes.",
     version="1.0.0",
+)
+
+
+# Allow frontend origin (change to your frontend URL)
+origins = [
+    "http://localhost:3000", # local frontend dev
+    "https://qrcode-frontend-iota.vercel.app",   # deployed frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],   # important: allow OPTIONS and all methods
+    allow_headers=["*"],
 )
 
 
