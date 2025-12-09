@@ -17,6 +17,7 @@ app = FastAPI(
 # Allow frontend origin (change to your frontend URL)
 origins = [
     "http://localhost:3000", # local frontend dev
+    "http://192.168.0.62:3000",                   # LAN dev frontend
     "https://qrcode-frontend-iota.vercel.app",   # deployed frontend
 ]
 
